@@ -10,7 +10,10 @@ scrcpy/
     ├── adb.exe            # Android Debug Bridge command-line tool
     └── fast_scrcpy.bat    # 1-Click zero-latency (120 FPS) screen mirror launcher
 
+Note:- Ypur Desktop should connected via smartphone through weired cable like type c
+
 all command in powershell.
+
 Step 1: Download & Extract into Your OneDrive Desktop
 Copy and paste this single command into Command Prompt and press Enter:
 
@@ -32,13 +35,16 @@ If your phone shows an "Allow USB debugging?" prompt, check "Always allow from t
 
 re open powershell if fail.
 run as administrator
+
 Step 1: Download and Extract
 PowerShell
 Invoke-WebRequest -Uri 'https://github.com/Genymobile/scrcpy/releases/download/v2.4/scrcpy-win64-v2.4.zip' -OutFile "$HOME\OneDrive\Desktop\scrcpy.zip"
 Expand-Archive -Path "$HOME\OneDrive\Desktop\scrcpy.zip" -DestinationPath "$HOME\OneDrive\Desktop\scrcpy" -Force
+
 Step 2: Navigate to the Folder
 PowerShell
 Set-Location "$HOME\OneDrive\Desktop\scrcpy\scrcpy-win64-v2.4"
+
 Step 3: Check Your Phone Connection
 PowerShell
 .\adb.exe devices
