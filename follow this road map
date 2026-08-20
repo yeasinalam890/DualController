@@ -12,16 +12,6 @@ scrcpy/
 
 Note:- Ypur Desktop should connected via smartphone through weired cable like type c
 
-all command in powershell.
-select 1 for plug, 2for wifi
-for wifi
-Step 1: Initialize Port 5555 via USBPlug your phone into your laptop via the USB cable.In PowerShell, restart the ADB daemon and open port 5555:PowerShell.\adb.exe kill-server
-.\adb.exe start-server
-.\adb.exe tcpip 5555
-Confirm the output says:Plaintextrestarting in TCP mode port: 5555
-Step 2: Establish the Wi-Fi ConnectionUnplug the USB cable.Connect ADB over your local network:PowerShell.\adb.exe connect 192.168.1.2:5555
-Verify the device is listed:PowerShell.\adb.exe devices
-Expected output:PlaintextList of devices attached
-192.168.1.2:5555    device
-Step 3: Launch Wireless Mirroring (Android 16 Safe)Launch with --no-audio to prevent Android 16 from hanging during connection:PowerShell.\scrcpy.exe -e --no-audio --max-size=1080
-Troubleshooting Checklist If adb connect Fails:Windows Firewall / Network Profile: Open Windows Settings $\rightarrow$ Network & internet $\rightarrow$ Wi-Fi $\rightarrow$ click your connected network $\rightarrow$ set network profile type to Private network (Public mode blocks local incoming TCP traffic).Phone IP Verification: Re-check your phone's Wi-Fi settings to ensure the router did not reassign the IP address to something other than 192.168.1.2.
+also select connected with this device with file sharing mode also wirless usb enable
+
+press on 'fast_scrcpy' file select 1 for connected wth type c or 2 for connected with wifi
