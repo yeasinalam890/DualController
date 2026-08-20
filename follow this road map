@@ -9,3 +9,45 @@ scrcpy/
     ├── scrcpy.exe         # High-speed native mirror executable
     ├── adb.exe            # Android Debug Bridge command-line tool
     └── fast_scrcpy.bat    # 1-Click zero-latency (120 FPS) screen mirror launcher
+
+all command in powershell.
+Step 1: Download & Extract into Your OneDrive Desktop
+Copy and paste this single command into Command Prompt and press Enter:
+
+DOS
+powershell -Command "Invoke-WebRequest -Uri 'https://github.com/Genymobile/scrcpy/releases/download/v2.4/scrcpy-win64-v2.4.zip' -OutFile 'C:\Users\yeasi\OneDrive\Desktop\scrcpy.zip'; Expand-Archive -Path 'C:\Users\yeasi\OneDrive\Desktop\scrcpy.zip' -DestinationPath 'C:\Users\yeasi\OneDrive\Desktop\scrcpy' -Force"
+Wait a few seconds for the download and extraction to complete.
+
+Step 2: Open and Run scrcpy
+Navigate to the extracted folder:
+
+DOS
+cd "C:\Users\yeasi\OneDrive\Desktop\scrcpy\scrcpy-win64-v2.4"
+Launch the screen mirror:
+
+DOS
+scrcpy.exe
+Step 3: Check Your Phone Screen
+If your phone shows an "Allow USB debugging?" prompt, check "Always allow from this computer" and tap Allow.
+
+re open powershell if fail.
+run as administrator
+Step 1: Download and Extract
+PowerShell
+Invoke-WebRequest -Uri 'https://github.com/Genymobile/scrcpy/releases/download/v2.4/scrcpy-win64-v2.4.zip' -OutFile "$HOME\OneDrive\Desktop\scrcpy.zip"
+Expand-Archive -Path "$HOME\OneDrive\Desktop\scrcpy.zip" -DestinationPath "$HOME\OneDrive\Desktop\scrcpy" -Force
+Step 2: Navigate to the Folder
+PowerShell
+Set-Location "$HOME\OneDrive\Desktop\scrcpy\scrcpy-win64-v2.4"
+Step 3: Check Your Phone Connection
+PowerShell
+.\adb.exe devices
+If your phone shows a prompt asking "Allow USB debugging?", tap Allow (and check "Always allow").
+
+Step 4: Launch Screen Mirroring & Control
+PowerShell
+.\scrcpy.exe
+A live window of your phone screen will open on your laptop, allowing full mouse clicks, swipes, and laptop keyboard typing. In the future, you can also just open that scrcpy folder on your desktop and double-click scrcpy.exe.
+
+
+Your full phone screen will instantly display in a smooth, high-resolution window on your laptop desktop. You can click to open apps, swipe with your mouse, type on your physical laptop keyboard, and control the entire device in real time.
