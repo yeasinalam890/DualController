@@ -1,0 +1,11 @@
+DualController/
+│
+├── server.py              # Backend FastAPI server handling screen capture & inputs
+├── index.html             # Frontend browser interface for phone control
+└── run_server.bat         # 1-Click launcher to start the Python web server
+
+scrcpy/
+└── scrcpy-win64-v2.4/
+    ├── scrcpy.exe         # High-speed native mirror executable
+    ├── adb.exe            # Android Debug Bridge command-line tool
+    └── fast_scrcpy.bat    # 1-Click zero-latency (120 FPS) screen mirror launcher
