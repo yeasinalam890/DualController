@@ -1,64 +1,52 @@
 @echo off
-title Android Mirror - Cable & WiFi with Audio
+title Android Mirror - 1-Click WiFi & Cable
 cd /d "C:\Users\yeasi\OneDrive\Desktop\scrcpy\scrcpy-win64-v2.4"
 cls
 
 echo ======================================================
-echo       SCRCPY DUAL CONTROLLER (Audio Enabled)
+echo           SCRCPY DIRECT CONTROLLER
 echo ======================================================
 echo.
-echo  [1] USB Cable Mode (120 FPS + Low-Latency Audio)
-echo  [2] WiFi Mode      (Wireless Screen + Audio)
-echo  [3] One-Time WiFi Setup (Enable Port 5555 via Cable)
-echo  [4] Exit
+echo  [1] USB Cable Mode
+echo  [2] WiFi Mode (Direct Connect)
+echo  [3] Exit
 echo.
 echo ======================================================
-set /p mode="Choose connection type (1/2/3/4): "
+set /p mode="Choose connection type (1/2/3): "
 
 if "%mode%"=="1" goto USB_MODE
 if "%mode%"=="2" goto WIFI_MODE
-if "%mode%"=="3" goto SETUP_WIFI
-if "%mode%"=="4" exit
+if "%mode%"=="3" exit
 
 :USB_MODE
 cls
-echo [Connecting via USB Cable with Audio]...
+echo [Connecting via USB Cable]...
 scrcpy.exe -d --audio-codec=aac --audio-buffer=40 --display-buffer=0 --max-fps=120 --video-bit-rate=16M --max-size=1080 --stay-awake
 if %ERRORLEVEL% NEQ 0 (
-    echo.
-    echo Primary audio failed. Retrying with Opus audio codec...
+    echo Retrying with Opus audio codec...
     scrcpy.exe -d --audio-codec=opus --audio-buffer=50 --max-size=1080
 )
 goto END
 
 :WIFI_MODE
 cls
-echo [Connecting via WiFi with Audio]...
-set /p phone_ip="Enter your Phone IP Address (e.g. 192.168.1.2): "
-adb.exe connect %phone_ip%:5555
+echo ======================================================
+echo Make sure "Wireless Debugging" is toggled ON on your phone
+echo ======================================================
 echo.
-scrcpy.exe -e --audio-codec=aac --audio-buffer=50 --display-buffer=0 --max-fps=90 --video-bit-rate=10M --max-size=1080 --stay-awake
+set /p phone_target="Enter Phone IP:Port (e.g. 192.168.1.2:42001): "
+
+echo.
+echo [Connecting to %phone_target%]...
+adb.exe connect %phone_target%
+echo.
+
+scrcpy.exe -s %phone_target% --audio-codec=aac --audio-buffer=50 --display-buffer=0 --max-fps=90 --video-bit-rate=10M --max-size=1080 --stay-awake
 if %ERRORLEVEL% NEQ 0 (
     echo.
-    echo Primary audio failed. Retrying with Opus audio codec...
-    scrcpy.exe -e --audio-codec=opus --audio-buffer=60 --max-size=1080
+    echo Connection failed or primary audio failed. Retrying...
+    scrcpy.exe -s %phone_target% --audio-codec=opus --audio-buffer=60 --max-size=1080
 )
-goto END
-
-:SETUP_WIFI
-cls
-echo ======================================================
-echo ONE-TIME SETUP: Plug your phone into USB cable first!
-echo ======================================================
-echo.
-adb.exe kill-server
-adb.exe start-server
-adb.exe tcpip 5555
-echo.
-echo Port 5555 enabled! You can now unplug the cable.
-echo Use option [2] to connect wirelessly.
-echo.
-pause
 goto END
 
 :END
